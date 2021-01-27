@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -28,19 +30,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        linear_splash = (LinearLayout)findViewById(R.id.linear_splash);
+        linear_splash =findViewById(R.id.linear_splash);
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setMinimumFetchIntervalInSeconds(3600)
                 .build();
         mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
         mFirebaseRemoteConfig.setDefaultsAsync(R.xml.default_config);
+
         mFirebaseRemoteConfig.fetchAndActivate()
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
                         if (task.isSuccessful()) {
-
+                            mFirebaseRemoteConfig.activate();
                         } else {
 
                         }
@@ -48,18 +51,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-    }
+        }
 
-    void displayMessage() {
+    private void displayMessage() {
         String splash_background = mFirebaseRemoteConfig.getString("splash_background");
         boolean caps = mFirebaseRemoteConfig.getBoolean("splash_message_caps");
         String splash_message = mFirebaseRemoteConfig.getString("splash_message");
 
+        linear_splash.setBackgroundColor(Color.parseColor(splash_background));
 
+        if (caps) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(splash_message).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
 
-
+            builder.create().show();
         }
-
-
     }
+
 }

@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context="com.dpplatform.howltalk.MainActivity">
 
     <ImageView
         android:src="@drawable/splash"
         android:layout_width="130sp"
         android:layout_height="130sp" />
-
-    //이거도 수정!
 
 </LinearLayout>
