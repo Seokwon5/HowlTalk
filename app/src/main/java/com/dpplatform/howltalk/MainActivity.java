@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         boolean caps = mFirebaseRemoteConfig.getBoolean("splash_message_caps");
         String splash_message = mFirebaseRemoteConfig.getString("splash_message");
 
+        //이거 내가 수정했어!!
+
 
 
 

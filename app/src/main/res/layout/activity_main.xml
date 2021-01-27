@@ -12,4 +12,6 @@
         android:layout_width="130sp"
         android:layout_height="130sp" />
 
+    //이거도 수정!
+
 </LinearLayout>
