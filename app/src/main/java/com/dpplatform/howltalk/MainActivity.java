@@ -5,10 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         linear_splash =findViewById(R.id.linear_splash);
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
             });
 
             builder.create().show();
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
         }
     }
 
