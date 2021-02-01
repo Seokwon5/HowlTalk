@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context=".SignupActivity">
 
+    <ImageView
+        android:id="@+id/signupActivity_imageview_profile"
+        android:src="@drawable/iconfinder_People_4781820"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:layout_margin="20dp" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
