@@ -8,8 +8,6 @@
 
     <uses-feature android:name="android.hardware.camera2" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HowlTalk">
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".SplashActivity" />
+        <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

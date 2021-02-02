@@ -24,7 +24,7 @@ import java.security.PrivateKey;
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout linear_splash;
-    private FirebaseRemoteConfig mFirebaseRemoteConfig;
+    private FirebaseRemoteConfig FirebaseRemoteConfig;
 
 
     @Override
@@ -34,19 +34,19 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         linear_splash =findViewById(R.id.linear_splash);
-        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setMinimumFetchIntervalInSeconds(3600)
                 .build();
-        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
-        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.default_config);
+        FirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+        FirebaseRemoteConfig.setDefaultsAsync(R.xml.default_config);
 
-        mFirebaseRemoteConfig.fetchAndActivate()
+        FirebaseRemoteConfig.fetchAndActivate()
                 .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
                     @Override
                     public void onComplete(@NonNull Task<Boolean> task) {
                         if (task.isSuccessful()) {
-                            mFirebaseRemoteConfig.activate();
+                            FirebaseRemoteConfig.activate();
                         } else {
 
                         }
@@ -54,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        }
+    }
 
     private void displayMessage() {
-        String splash_background = mFirebaseRemoteConfig.getString("splash_background");
-        boolean caps = mFirebaseRemoteConfig.getBoolean("splash_message_caps");
-        String splash_message = mFirebaseRemoteConfig.getString("splash_message");
+        String splash_background = FirebaseRemoteConfig.getString("splash_background");
+        boolean caps = FirebaseRemoteConfig.getBoolean("splash_message_caps");
+        String splash_message = FirebaseRemoteConfig.getString("splash_message");
 
         linear_splash.setBackgroundColor(Color.parseColor(splash_background));
 
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             builder.create().show();
         } else {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 
