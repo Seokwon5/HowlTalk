@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.dpplatform.howltalk.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
+
+import static android.icu.text.DisplayContext.LENGTH_SHORT;
 
 public class SignupActivity extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 10;
@@ -56,8 +59,8 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null
-                || imageUri == null) { //빈값일때,
+                if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null) { //빈값일때
+                    Toast.makeText(getApplicationContext(), "모두 기입해 주시기 바랍니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -78,17 +81,12 @@ public class SignupActivity extends AppCompatActivity {
 
                             FirebaseDatabase.getInstance().getReference().child("userName").child(uid).setValue(userModel);
 
-
                         }
                     });
-
                             }
-
                         });
-            }
-        });
-
-
+                    }
+                });
     }
 
     @Override
