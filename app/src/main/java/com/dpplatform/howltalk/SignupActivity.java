@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.dpplatform.howltalk.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,8 +60,8 @@ public class SignupActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null) { //빈값일때
-                    Toast.makeText(getApplicationContext(), "모두 기입해 주시기 바랍니다.", Toast.LENGTH_SHORT).show();
+                if (email.getText().toString() == null || name.getText().toString() == null || password.getText().toString() == null || imageUri == null) { //빈값일때
+                    Toast.makeText(getApplicationContext(), "전부 작성 바람.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -79,7 +80,13 @@ public class SignupActivity extends AppCompatActivity {
                             userModel.userName = name.getText().toString();
                             userModel.profileImageUrl = imageUrl;
 
-                            FirebaseDatabase.getInstance().getReference().child("userName").child(uid).setValue(userModel);
+                            FirebaseDatabase.getInstance().getReference().child("userName").child(uid).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    SignupActivity.this.finish();
+                                }
+                            });
+
 
                         }
                     });

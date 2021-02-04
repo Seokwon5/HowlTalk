@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HowlTalk">
-        <activity android:name=".MainActivity2"></activity>
+        <activity android:name="chat.MessageActivity"></activity>
+        <activity android:name=".MainActivity2" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
